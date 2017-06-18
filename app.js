@@ -2,17 +2,13 @@ var express = require('express');
 var app = express();
 
 app.get("/webhook", function (req, res) {
-    if (req.query["hub.verify_token"] === 'simpleBot') {
+    if (req.query["hub.verify_token"] === 'my-super-token') {
         console.log("Verified webhook");
         res.status(200).send(req.query["hub.challenge"]);
     } else {
         console.error("Verification failed. The tokens do not match.");
         res.sendStatus(403);
     }
-});
-
-app.get('/', function(req, res) {
-	res.send('Deployed');
 });
 
 app.listen(process.env.PORT || 3000);
